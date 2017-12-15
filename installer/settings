@@ -1,0 +1,11 @@
+<?php
+
+echo "PHP-forum v0.1 installer - Website config setup<br>";
+
+?>
+
+<h4>Enter the website name</h4>
+<form action="finish.php" method="post">
+Website name: <input type="text" name="wname"><br>
+<input type="submit">
+</form>
