@@ -1,5 +1,11 @@
 <?php
-echo "PHP-forum v0.1 installer - Database setup<br>";
+
+function redirect() {
+    header('Location: settings.php');
+    die();
+}
+
+echo "PHP-forum v0.1 installer<br>";
 
 $database = include('../conf/database.php');
 $conn = new mysqli($database['host'], $database['user'], $database['pass']);
@@ -7,8 +13,6 @@ $conn = new mysqli($database['host'], $database['user'], $database['pass']);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-
-echo "Connection to MySQL opened<br>";
 
 echo "Creating database \"phpf\"<br>";
 $sql = "CREATE DATABASE phpf";
@@ -47,11 +51,11 @@ $sql = "CREATE TABLE members (
         
         if ($conn->query($sql) === TRUE) {
             echo "Table \"site\" created<br>";
-
-            echo "Installer finished<br>";
-            echo "Run \"settings.php\" next";
+            sleep(2);
+            redirect();
         } else {
             echo "Error creating table: " . $conn->error . "<br>";
             die("Installer stopped");
         }
+
 ?>
