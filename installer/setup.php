@@ -1,5 +1,5 @@
 <?php
-echo "PHP-forum v0.1 installer - Database setup";
+echo "PHP-forum v0.1 installer - Database setup<br>";
 
 $database = include('../conf/database.php');
 $conn = new mysqli($database['host'], $database['user'], $database['pass']);
@@ -8,19 +8,22 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-echo "Connection to MySQL opened";
+echo "Connection to MySQL opened<br>";
 
-echo "Creating database \"phpf\"";
-$sql1 = "CREATE DATABASE phpf";
-if ($conn->query($sql1) === TRUE) {
-    echo "Database \"phpf\" created successfully";
+echo "Creating database \"phpf\"<br>";
+$sql = "CREATE DATABASE phpf";
+if ($conn->query($sql) === TRUE) {
+    echo "Database \"phpf\" created successfully<br>";
 } else {
-    echo "Error creating database: " . $conn->error;
+    echo "Error creating database: " . $conn->error . "<br>";
     die("Installer stopped");
 }
 
-echo "Creating table \"members\"";
-$sql2 = "CREATE TABLE members (
+mysqli_close($conn);
+$conn = new mysqli($database['host'], $database['user'], $database['pass'], "phpf");
+
+echo "Creating table \"members\"<br>";
+$sql = "CREATE TABLE members (
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
     username VARCHAR(30) NOT NULL,
     realname VARCHAR(30) NOT NULL,
@@ -29,27 +32,26 @@ $sql2 = "CREATE TABLE members (
     reg_date TIMESTAMP
     )";
     
-    if ($conn->query($sql2) === TRUE) {
-        echo "Table \"members\" created";
+    if ($conn->query($sql) === TRUE) {
+        echo "Table \"members\" created<br>";
     } else {
-        echo "Error creating table: " . $conn->error;
+        echo "Error creating table: " . $conn->error . "<br>";
         die("Installer stopped");
     }
 
-    echo "Creating table \"site\"";
-    $sql3 = "CREATE TABLE site (
+    echo "Creating table \"site\"<br>";
+    $sql = "CREATE TABLE site (
         sitename VARCHAR(30) NOT NULL,
-        realname VARCHAR(30) NOT NULL,
-        reg_date TIMESTAMP
+        create_date TIMESTAMP
         )";
         
-        if ($conn->query($sql3) === TRUE) {
-            echo "Table \"site\" created";
+        if ($conn->query($sql) === TRUE) {
+            echo "Table \"site\" created<br>";
 
-            echo "Installer finished";
+            echo "Installer finished<br>";
             echo "Run \"settings.php\" next";
         } else {
-            echo "Error creating table: " . $conn->error;
+            echo "Error creating table: " . $conn->error . "<br>";
             die("Installer stopped");
         }
 ?>
