@@ -1,7 +1,7 @@
 <?php
 echo "PHP-forum v0.1 installer - Database setup";
 
-$database = include('conf/database.php');
+$database = include('../conf/database.php');
 $conn = new mysqli($database['host'], $database['user'], $database['pass']);
 
 if ($conn->connect_error) {
