@@ -1,6 +1,6 @@
 <?php
 
-echo "PHP-forum v0.1 - Wipe website script<br>";
+echo "PHP-forum v0.1 ( Wipe website script )<br>";
 
 $database = include('../conf/database.php');
 $conn = new mysqli($database['host'], $database['user'], $database['pass'], "phpf");
@@ -15,4 +15,5 @@ if (mysqli_query($conn, $sql)) {
    echo "Error wiping website: " . mysqli_error($conn) . "<br>";
    die("Wipe stopped");
 }
+
 ?>
